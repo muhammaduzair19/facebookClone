@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="app.js" defer></script>
+    <title>Facebook -log in or sign up</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="mid-container">
+            <div class="logo">
+                <div class="logo-img">
+                    <img src="./images/facebook-logo.png" alt="">
+                </div>
+                <div class="tagline">
+                    <p>Facebook helps you connect and share with the people in your life.</p>
+                </div>
+            </div>
+            <div class="login-container">
+                <div class="login-box">
+                    <input type="text" placeholder="Enter email or phone number" required class="login-email-number"
+                        name="login-email-number">
+
+                    <input type="password" placeholder="Password" class="login-password" required name="login-password">
+                    <button id="login" onclick="login()">Log in</button>
+                    <a class="forget-password" href="#">Forgotten password?</a>
+                    <hr>
+                    <button id="new-account" onclick="showSignUp()">Create new account</button>
+                </div>
+                <div class="line">
+                    <p><b>Create a Page</b> for a celebrity, brand or business.</p>
+                </div>
+            </div>
+
+        </div>
+        <div class="overlay hidden">
+        </div>
+        <div class="signup-container hidden">
+            <div class="sign-up">
+                <div class="heading">
+                    <h3>
+                        Sign Up
+                    </h3>
+                    <button class="close" onclick="hideSignUp()">X</button>
+                </div>
+                <div class="stagline">
+                    <p>It's quick and easy</p>
+                </div>
+                <hr>
+                <div class="signup-form">
+                    <div class="sname">
+                        <input id="firstName" style="width: 49%;" placeholder="First name" type="text">
+                        <input id="surName" style="width: 49%;" placeholder="Surname" type="text">
+                    </div>
+                    <input id="signUpEmail" style="width: 98%;" placeholder="Mobile number or email address"
+                        type="number email">
+                    <input id="signUpPassword" style="width: 98%;" placeholder="New password" class="spassword"
+                        type="password">
+                    <div class="dob-container">
+                        <p>
+                        <div class="dob-section">
+                            <select name="day" id="day">
+                                <option value="01">01</option>
+                                <option value="02">02</option>
+                                <option value="03">03</option>
+                                <option value="04">04</option>
+                                <option value="05">05</option>
+                                <option value="06">06</option>
+                                <option value="07">07</option>
+                                <option value="08">08</option>
+                                <option value="09">09</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                                <option value="13">13</option>
+                                <option value="14">14</option>
+                                <option value="15">15</option>
+                                <option value="16">16</option>
+                                <option value="17">17</option>
+                                <option value="18">18</option>
+                                <option value="19">19</option>
+                                <option value="20">20</option>
+                                <option value="21">21</option>
+                                <option value="22">22</option>
+                                <option value="23">23</option>
+                                <option value="24">24</option>
+                                <option value="25">25</option>
+                                <option value="26">26</option>
+                                <option value="27">27</option>
+                                <option value="28">28</option>
+                                <option value="29">29</option>
+                                <option value="30">30</option>
+                                <option value="31">31</option>
+                            </select>
+                            <select name="month" id="month">
+                                <option value="January">January</option>
+                                <option value="Feburary">Feburary</option>
+                                <option value="March">March</option>
+                                <option value="April">April</option>
+                                <option value="May">May</option>
+                                <option value="June">June</option>
+                                <option value="July">July</option>
+                                <option value="August">August</option>
+                                <option value="September">September</option>
+                                <option value="October">October</option>
+                                <option value="November">November</option>
+                                <option value="December">December</option>
+                            </select>
+                            <select name="year" id="year">
+                                <option value="2023">2023</option>
+                                <option value="2022">2022</option>
+                                <option value="2021">2021</option>
+                                <option value="2020">2020</option>
+                                <option value="2019">2019</option>
+                                <option value="2018">2018</option>
+                            </select>
+                        </div>
+                        <div class="gender-container">
+                            <p>Gender?</p>
+                            <div class="gender-label">
+                                <span>Female <input onclick="getGender('female')" type="radio" name="gender" class="gender">
+                                </span>
+                                <span>Male <input onclick="getGender('male')" type="radio" name="gender" class="gender">
+                                </span>
+                                <span>Custom <input onclick="getGender('custom')" type="radio" name="gender" class="gender">
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="description">
+                        <p>
+                            People who use our service may have uploaded your contact information to Facebook. <a
+                                href="#">Learn more.</a>
+                            <br>
+                            <br>
+                            By clicking Sign Up, you agree to our <a href="#">Terms,</a> <a href="#">Privacy Policy</a>
+                            and <a href="#">Cookies Policy.</a> You may receive SMS notifications from us and can opt
+                            out at any time.
+                        </p>
+                    </div>
+                    <div class="signupbtn-container">
+                        <button class="signup" id="signup">Sign Up</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
