@@ -95,7 +95,7 @@ body {
     width: 30%;
     height: 100vh;
     padding-left: 20px;
-    background-color: rgb(195, 198, 198);
+    /* background-color: rgb(195, 198, 198); */
 }
 
 .home{
@@ -115,6 +115,16 @@ body {
     border-bottom: 1px solid #a9a9a9;
     height: 200px;
 }
+.left-lower-menu{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 70%;
+    border-bottom: 1px solid #a9a9a9;
+    max-height: 600px;
+    min-height: 400px;
+    height: 100%;
+}
 
 .leftside p{
     font-weight: 200;
@@ -132,24 +142,75 @@ body {
     font-size: 18px;
 }
 
-.pf-img {
+.img {
     margin-right: 10px;
-    width: 25px;
-    height: 25px;
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
     background-color: beige;
 }
 
-
+.seeAll{
+    padding: 6px 6px 6px;
+}
+.shortcuts{
+    font-size: 9px;
+    color: #6b6a6a;
+    font-weight: bolder;
+}
 
 .centerside {
     width: 40%;
     height: 100vh;
-    background-color: blue;
+    /* background-color: blue; */
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+}
+.postContainer{
+    background-color: rgb(255, 255, 255);
+    width:100%;
+    height: 6rem;
+    border-radius: 5px;
+}
+.pfp-input{
+    display: flex;
+    margin: 0 10px 0 10px;
+    justify-content: space-between;
+    align-items: center;
+    height: 50%;
+}
+.pf-img{
+    margin-left: 10px;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background-color: beige;
+}
+.postInput{
+    margin-left: 10px;
+    width: 100%;
+}
+.postInput input{
+    padding: 10px;
+    width: 98%;
+    height: 38px;
+    border-radius: 30px;
+    border: none;
+    background-color: #a9a9a9;
+    color: #6b6a6a;
+    font-weight: bold;
+}
+.icon{
+    display: flex;
+    height: 50%;
+    justify-content: space-around;
+    align-items: center;
+
 }
 
 .rightside {
     height: 100vh;
     width: 30%;
-    background-color: chartreuse;
+    /* background-color: chartreuse; */
 }
