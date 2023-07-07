@@ -1,5 +1,9 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-analytics.js";
+import { getFirestore, collection, addDoc, setDoc, doc } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
+
+
 
 
 const firebaseConfig = {
@@ -15,24 +19,14 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
+const auth = getAuth(app);
+const db = getFirestore(app);
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-const newaccount = document.querySelector('.new-account');
+const newaccount = document.getElementById('new-account');
 const overlay = document.querySelector('.overlay')
+const close = document.querySelector('.close')
 const signup = document.querySelector('.signup-container')
 const loginbtn = document.getElementById('login')
 const signupbtn = document.getElementById('signup');
@@ -44,76 +38,99 @@ let day = document.getElementById('day').value
 let month = document.getElementById('month').value
 let year = document.getElementById('year').value
 let gender;
-let users = JSON.parse(localStorage.getItem('users')) || [];
 
+close.addEventListener('click', () => {
+    console.log("helloc")
+    overlay.classList.add('hidden')
+    signup.classList.add('hidden')
+})
 
-function showSignUp() {
-    overlay.classList.toggle('hidden')
-    signup.classList.toggle('hidden')
-}
+newaccount.addEventListener('click', () => {
+    console.log("helloc")
+    overlay.classList.remove('hidden')
+    signup.classList.remove('hidden')
+})
+
 function hideSignUp() {
-    overlay.classList.toggle('hidden')
-    signup.classList.toggle('hidden')
+    overlay.classList.add('hidden')
+    signup.classList.add('hidden')
 }
 
-function login() {
+
+loginbtn.addEventListener('click', () => {
     var loginEmailOrNumber = document.querySelector('.login-email-number');
     var loginpassword = document.querySelector('.login-password');
 
-    if (loginEmailOrNumber.value == "" || loginpassword.value == "") {
-        alert("please enter correct email or password");
+    signInWithEmailAndPassword(auth, loginEmailOrNumber.value, loginpassword.value)
+        .then((userCredential) => {
+            const user = userCredential.user;
+            if (user){
+                window.location.href = './dashboard/index.html'
+            }
+        })
+
+        .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            if(errorCode == 'auth/user-not-found'){
+                alert('kindly register your account')
+            }else if(errorCode == 'auth/wrong-password'){
+                alert('kindly enter the correct password')
+            }
+        });
+})
+
+
+signupbtn.addEventListener('click', async () => {
+
+    try {
+        const response = await createUserWithEmailAndPassword(auth, sEmail.value, sPassword.value)
+        console.log(response, "==>>response")
+
+        if (response.user) {
+            addUserHandler(response.user.uid)
+        }
+    } catch (error) {
+        console.log(error)
     }
+})
 
 
-    const userRegistered = users.filter((user) => {
-        return user.email === loginEmailOrNumber.value;
-    })
-    console.log(userRegistered)
+const female = document.getElementById('female')
+const male = document.getElementById('male')
+const custom = document.getElementById('custom')
 
-    if (!userRegistered.length) return alert("This email is not registered, please create new account")
+female.addEventListener('click', () => {
+    gender = 'female';
+    console.log(gender)
+})
+male.addEventListener('click', () => {
+    gender = 'male';
+    console.log(gender)
+})
+custom.addEventListener('click', () => {
+    gender = 'custom';
+    console.log(gender)
+})
 
-    if (userRegistered[0].password === loginpassword.value) {
-        localStorage.setItem('isLoggedInUser', JSON.stringify(userRegistered[0]))
-        window.location.href = "./dashboard/index.html";
-    }
-
-
-}
-
-function getGender(g) {
-    gender = g;
-}
-
-
-
-signupbtn.addEventListener('click', () => {
-
-    if (firstName.value !== "" && surName.value !== "" && sEmail.value !== "" && sPassword.value !== "" && gender !== undefined && day !== undefined && month !== undefined && year !== undefined) {
-
-        if (sPassword.value.length < 8) return alert("Password should contain atleast 8 letters")
-
-        userObj = {
+async function addUserHandler(uid) {
+    try {
+        await setDoc(doc(db, "users", uid), {
             firstName: firstName.value,
             surName: surName.value,
             email: sEmail.value,
             password: sPassword.value,
+            dateOfBirth: new Date(`${year}-${month}-${day}`),
             gender,
-            dateOfBirth: new Date(`${year}-${month}-${day}`)
-        }
-        users.push(userObj)
+        });
+        setTimeout(() => {
+            alert("login successffully")
+            hideSignUp();
+        }, 2000)
 
-        localStorage.setItem('users', JSON.stringify(users))
-        alert("sign successfully")
-
-        firstName.value = "";
-        surName.value = "";
-        sEmail.value = "";
-        sPassword.value = "";
-        hideSignUp();
+    } catch (error) {
+        console.log(error)
     }
-    else {
-        alert('kindly fill all the fields')
-    }
-})
+}
 
 
