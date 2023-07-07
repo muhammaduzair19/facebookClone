@@ -57,35 +57,32 @@ function hideSignUp() {
 }
 
 
-loginbtn.addEventListener('click', () => {
+loginbtn.addEventListener('click', async () => {
     var loginEmailOrNumber = document.querySelector('.login-email-number');
     var loginpassword = document.querySelector('.login-password');
+    try {
+        const response = await signInWithEmailAndPassword(auth, loginEmailOrNumber.value, loginpassword.value)
+        
+        if(response.user){
+            window.location.href = './dashboard/index.html'
+        }
+    } catch (error) {
+        if(error.code == 'auth/user-not-found'){
+            alert('kindly register your account')
+            loginEmailOrNumber.value = '';
+            loginpassword.value = '';
 
-    signInWithEmailAndPassword(auth, loginEmailOrNumber.value, loginpassword.value)
-        .then((userCredential) => {
-            const user = userCredential.user;
-            if (user){
-                window.location.href = './dashboard/index.html'
-            }
-        })
-
-        .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            if(errorCode == 'auth/user-not-found'){
-                alert('kindly register your account')
-            }else if(errorCode == 'auth/wrong-password'){
-                alert('kindly enter the correct password')
-            }
-        });
+        }else if(error.code == 'auth/wrong-password'){
+            alert('kindly enter the correct password')
+            loginpassword.value = '';
+        }
+    }
 })
-
 
 signupbtn.addEventListener('click', async () => {
 
     try {
         const response = await createUserWithEmailAndPassword(auth, sEmail.value, sPassword.value)
-        console.log(response, "==>>response")
 
         if (response.user) {
             addUserHandler(response.user.uid)
@@ -94,7 +91,6 @@ signupbtn.addEventListener('click', async () => {
         console.log(error)
     }
 })
-
 
 const female = document.getElementById('female')
 const male = document.getElementById('male')
