@@ -1,4 +1,4 @@
-import { auth, app, db, getAuth, getFirestore, createUserWithEmailAndPassword, signInWithEmailAndPassword, collection, addDoc, setDoc} from "./firebase.js";
+import { auth, app, db, getAuth, getFirestore, createUserWithEmailAndPassword, signInWithEmailAndPassword, collection, addDoc, setDoc, doc} from "./firebase.js";
 
 
 

@@ -14,6 +14,8 @@
 
 <body>
     <div class="container">
+
+
         <div class="headline">
             <div class="fb-logo">
                 <img src="../images/facebook-logo.png" alt="facebook-logo">
@@ -34,7 +36,10 @@
                 <div class="profile"></div>
             </div>
         </div>
+
+
         <div class="timeline">
+
             <div class="leftside">
 
                 <div class="home">
@@ -44,7 +49,7 @@
                     </div>
                     <div class="pf-icon left-menu-item">
                         <div class="img"></div>
-                        <p id="user-name">Uzair</p>
+                        <p id="user-name"></p>
                     </div>
                 </div>
                 <div class="left-menu">
@@ -155,13 +160,39 @@
 
                 </div>
             </div>
+
+
             <div class="centerside">
+                <div class="createPost" style="display: none;">
+                    <div class="head">
+                        <h4>Create Post</h4>
+                        <button class="close">X</button>
+                    </div>
+                    <div class="post-pf-icon">
+                        <div class="img"></div>
+                        <p id="post-username">Uzair</p>
+                    </div>
+                    <div class="postArea">
+                        <textarea placeholder="What's on your mind?" name="" id="" cols="68" rows="8"></textarea>
+                    </div>
+                    <div class="uploadImage">
+                        Add Image or Video
+                        <input type="file" name="" id="">
+
+                    </div>
+                    <div class="post-btn">
+                        <button class="post">Post</button>
+                    </div>
+                </div>
 
                 <div class="postContainer">
                     <div class="pfp-input">
-                        <div class="pf-img"></div>
+
+                        <div class="pf-img">
+
+                        </div>
                         <div class="postInput">
-                            <input type="text" placeholder="What's on your mind?">
+                            <input id="postinput" type="text" placeholder="What's on your mind?">
                         </div>
                     </div>
                     <div class="icon">
@@ -175,13 +206,23 @@
                             Feeling/Activity
                         </div>
                     </div>
+                    
                 </div>
             </div>
+            <div class="overlay" style="display: none;"></div>
+
+
+
+
             <div class="rightside"></div>
         </div>
 
     </div>
 
+
+
+
+    <script type="module" src="app.js"></script>
 </body>
 
 </html>
